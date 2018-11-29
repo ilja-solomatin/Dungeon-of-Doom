@@ -67,20 +67,13 @@ public class GameLogic {
         char[][] map = this.map.getMap();
         for(int row = playerRow - 2; row <= playerRow + 2; row++){
             for(int column = playerColumn - 2; column <= playerColumn + 2; column++){
-                System.out.print(map[row][column]);
-                System.out.print("\t");
+                if(row >= 0 && row < map.length && column >= 0 && column < map[0].length){
+                    System.out.print(map[row][column]);
+                    System.out.print("\t");
+                }
             }
             System.out.println();
         }
-
-//        for(char[] row : this.map.getMap()){
-//            for (char i : row) {
-//                System.out.print(i);
-//                System.out.print("\t");
-//            }
-//            System.out.println();
-//        }
-//        return this.map.getMap().toString();
     }
 
     /**
