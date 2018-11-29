@@ -5,12 +5,14 @@
 public class GameLogic {
 
     private Map map;
+    private HumanPlayer player;
 
     /**
      * Default constructor
      */
     public GameLogic() {
         map = new Map();
+        player = new HumanPlayer();
     }
 
     /**
@@ -28,7 +30,7 @@ public class GameLogic {
      * @return : Gold required to win.
      */
     protected String hello() {
-        return null;
+        return Integer.toString(map.getGoldRequired());
     }
 
     /**
@@ -37,7 +39,7 @@ public class GameLogic {
      * @return : Gold currently owned.
      */
     protected String gold() {
-        return null;
+        return Integer.toString(player.getCurrentGold());
     }
 
     /**

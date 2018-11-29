@@ -17,9 +17,9 @@ public class Map {
      * Default constructor, creates the default map "Very small Labyrinth of doom".
      */
     public Map() {
-        mapName = "Very small Labyrinth of Doom";
-        goldRequired = 2;
-        map = new char[][]{
+        this.mapName = "Very small Labyrinth of Doom";
+        this.goldRequired = 2;
+        this.map = new char[][]{
                 {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'},
                 {'#','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','#'},
                 {'#','.','.','.','.','.','.','G','.','.','.','.','.','.','.','.','.','E','.','#'},
@@ -45,14 +45,14 @@ public class Map {
      * @return : Gold required to exit the current map.
      */
     protected int getGoldRequired() {
-        return goldRequired;
+        return this.goldRequired;
     }
 
     /**
      * @return : The map as stored in memory.
      */
     protected char[][] getMap() {
-        return map;
+        return this.map;
     }
 
 
@@ -60,7 +60,7 @@ public class Map {
      * @return : The name of the current map.
      */
     protected String getMapName() {
-        return mapName;
+        return this.mapName;
     }
 
 

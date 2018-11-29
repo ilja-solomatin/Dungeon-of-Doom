@@ -4,6 +4,8 @@
  */
 public class HumanPlayer {
 
+    private int currentGold;
+
     /**
      * Reads player's input from the console.
      * <p>
@@ -23,7 +25,9 @@ public class HumanPlayer {
         return null;
     }
 
-
+    protected int getCurrentGold(){
+        return this.currentGold;
+    }
 
 
 }
