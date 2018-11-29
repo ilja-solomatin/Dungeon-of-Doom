@@ -6,6 +6,8 @@ public class GameLogic {
 
     private Map map;
     private HumanPlayer player;
+    private int playerGold;
+    private String playerCommand;
 
     /**
      * Default constructor
@@ -13,6 +15,7 @@ public class GameLogic {
     public GameLogic() {
         map = new Map();
         player = new HumanPlayer();
+        this.playerGold = 0;
     }
 
     /**
@@ -39,7 +42,7 @@ public class GameLogic {
      * @return : Gold currently owned.
      */
     protected String gold() {
-        return Integer.toString(player.getCurrentGold());
+        return Integer.toString(this.playerGold);
     }
 
     /**
@@ -58,7 +61,14 @@ public class GameLogic {
      * @return : A String representation of the game map.
      */
     protected String look() {
-        return null;
+        for(char[] row : this.map.getMap()){
+            for (char i : row) {
+                System.out.print(i);
+                System.out.print("\t");
+            }
+            System.out.println();
+        }
+        return this.map.getMap().toString();
     }
 
     /**
@@ -77,7 +87,32 @@ public class GameLogic {
 
     }
 
+    public static void printRow(char[] row){
+
+    }
+
     public static void main(String[] args) {
         GameLogic logic = new GameLogic();
+        while(true){
+            logic.playerCommand = logic.player.getInputFromConsole().toLowerCase();
+            switch (logic.playerCommand){
+                case "hello":
+                    System.out.println("Gold to win: " + logic.hello());
+                    break;
+                case "gold":
+                    System.out.println("Gold to win: " + logic.gold());
+                    break;
+                case "move":
+                    break;
+                case "pickup":
+                    break;
+                case "look":
+                    System.out.println(logic.look());
+                    break;
+                default:
+                    System.out.println("Fail");
+                    break;
+            }
+        }
     }
 }

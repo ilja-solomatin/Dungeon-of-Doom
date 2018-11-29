@@ -1,10 +1,9 @@
+import java.util.Scanner;
 /**
  * Runs the game with a human player and contains code needed to read inputs.
  *
  */
 public class HumanPlayer {
-
-    private int currentGold;
 
     /**
      * Reads player's input from the console.
@@ -12,7 +11,8 @@ public class HumanPlayer {
      * return : A string containing the input the player entered.
      */
     protected String getInputFromConsole() {
-        return null;
+        Scanner reader = new Scanner(System.in);
+        return reader.next();
     }
 
     /**
@@ -21,13 +21,8 @@ public class HumanPlayer {
      *
      * @return : Processed output or Invalid if the @param command is wrong.
      */
-    protected String getNextAction() {
+    protected String getNextAction(String userInput) {
         return null;
     }
-
-    protected int getCurrentGold(){
-        return this.currentGold;
-    }
-
 
 }

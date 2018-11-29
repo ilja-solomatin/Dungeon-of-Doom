@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * Reads and contains in memory the map of the game.
  *
@@ -30,6 +32,23 @@ public class Map {
                 {'#','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','#'},
                 {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'}
         };
+        this.placePlayer();
+    }
+
+    private void placePlayer(){
+        Random randNumGenerator =  new Random();
+        boolean canPlace = false;
+        int mapRows = this.map.length;
+        int mapColumns = this.map[0].length;
+
+        while(!canPlace){
+            int randRow = randNumGenerator.nextInt((mapRows - 1 - 1) + 1) + 1;
+            int randColumn = randNumGenerator.nextInt((mapColumns - 1 - 1) + 1) + 1;
+            if(this.map[randRow][randColumn] != 'G'){
+                canPlace = true;
+                this.map[randRow][randColumn] = 'P';
+            }
+        }
     }
 
     /**
