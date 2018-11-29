@@ -68,6 +68,10 @@ public class Map {
         this.standingOn = this.map[currentY][currentX];
     }
 
+    public void setStandingOn(char symbol){
+        this.standingOn = symbol;
+    }
+
     public char getStandingOn(){
         return this.standingOn;
     }
@@ -76,6 +80,14 @@ public class Map {
         this.playerPosX = newX;
         this.playerPosY = newY;
         this.map[this.playerPosY][this.playerPosX] = 'P';
+    }
+
+    public int getPlayerPosX(){
+        return this.playerPosX;
+    }
+
+    public int getPlayerPosY(){
+        return this.playerPosY;
     }
 
     public void updatePlayerPos(char direction){

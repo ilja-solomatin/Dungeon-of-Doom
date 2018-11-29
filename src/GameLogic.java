@@ -61,15 +61,26 @@ public class GameLogic {
      *
      * @return : A String representation of the game map.
      */
-    protected String look() {
-        for(char[] row : this.map.getMap()){
-            for (char i : row) {
-                System.out.print(i);
+    protected void look() {
+        int playerRow = this.map.getPlayerPosY();
+        int playerColumn = this.map.getPlayerPosX();
+        char[][] map = this.map.getMap();
+        for(int row = playerRow - 2; row <= playerRow + 2; row++){
+            for(int column = playerColumn - 2; column <= playerColumn + 2; column++){
+                System.out.print(map[row][column]);
                 System.out.print("\t");
             }
             System.out.println();
         }
-        return this.map.getMap().toString();
+
+//        for(char[] row : this.map.getMap()){
+//            for (char i : row) {
+//                System.out.print(i);
+//                System.out.print("\t");
+//            }
+//            System.out.println();
+//        }
+//        return this.map.getMap().toString();
     }
 
     /**
@@ -79,10 +90,11 @@ public class GameLogic {
     protected void pickup() {
         if(this.map.getStandingOn() == 'G'){
             this.playerGold++;
-            System.out.println("SUCCESS. " + this.gold());
+            this.map.setStandingOn('.');
+            System.out.println("SUCCESS. Gold owned: " + this.gold());
         }
         else{
-            System.out.println("FAIL. " + this.gold());
+            System.out.println("FAIL. Gold owned: " + this.gold());
         }
     }
 
@@ -121,7 +133,7 @@ public class GameLogic {
                 logic.pickup();
             }
             else if(logic.playerCommand.equals("look")){
-                System.out.println(logic.look());
+                logic.look();
             }
             else if(logic.playerCommand.equals("quit")){
                 logic.quitGame();
