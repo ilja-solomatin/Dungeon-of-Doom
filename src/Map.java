@@ -56,6 +56,7 @@ public class Map {
             int randColumn = randNumGenerator.nextInt((mapColumns - 2 - 1) + 1) + 1;
             if(this.map[randRow][randColumn] != 'G'){
                 canPlace = true;
+                this.setStandingOn(randColumn, randRow);
                 this.map[randRow][randColumn] = 'P';
                 this.playerPosX = randColumn;
                 this.playerPosY = randRow;
@@ -71,16 +72,7 @@ public class Map {
         return this.standingOn;
     }
 
-    public int getPlayerPosX(){
-        return this.playerPosX;
-    }
-
-    public int getPlayerPosY(){
-        return this.playerPosY;
-    }
-
     public void setPlayerPos(int newX, int newY){
-        this.map[playerPosY][playerPosX] = '.';
         this.playerPosX = newX;
         this.playerPosY = newY;
         this.map[this.playerPosY][this.playerPosX] = 'P';
@@ -90,6 +82,7 @@ public class Map {
         switch(direction){
             case 'n':
                 if(this.map[this.playerPosY - 1][this.playerPosX] != '#'){
+                    this.map[this.playerPosY][this.playerPosX] = this.getStandingOn();
                     this.setStandingOn(this.playerPosX, this.playerPosY - 1);
                     setPlayerPos(this.playerPosX, this.playerPosY - 1);
                     System.out.println("Success");
@@ -100,6 +93,7 @@ public class Map {
                 break;
             case 'e':
                 if(this.map[this.playerPosY][this.playerPosX + 1] != '#'){
+                    this.map[this.playerPosY][this.playerPosX] = this.getStandingOn();
                     this.setStandingOn(this.playerPosX + 1, this.playerPosY);
                     setPlayerPos(this.playerPosX + 1, this.playerPosY);
                     System.out.println("Success");
@@ -110,6 +104,7 @@ public class Map {
                 break;
             case 's':
                 if(this.map[this.playerPosY + 1][this.playerPosX] != '#'){
+                    this.map[this.playerPosY][this.playerPosX] = this.getStandingOn();
                     this.setStandingOn(this.playerPosX, this.playerPosY + 1);
                     setPlayerPos(this.playerPosX, this.playerPosY + 1);
                     System.out.println("Success");
@@ -120,6 +115,7 @@ public class Map {
                 break;
             case 'w':
                 if(this.map[this.playerPosY][this.playerPosX - 1] != '#'){
+                    this.map[this.playerPosY][this.playerPosX] = this.getStandingOn();
                     this.setStandingOn(this.playerPosX - 1, this.playerPosY);
                     setPlayerPos(this.playerPosX - 1, this.playerPosY);
                     System.out.println("Success");

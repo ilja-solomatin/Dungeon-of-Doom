@@ -44,7 +44,7 @@ public class GameLogic {
      * @return : Gold currently owned.
      */
     protected String gold() {
-        return "Gold owned: " + Integer.toString(this.playerGold);
+        return Integer.toString(this.playerGold);
     }
 
     /**
@@ -90,7 +90,14 @@ public class GameLogic {
      * Quits the game, shutting down the application.
      */
     protected void quitGame() {
-
+        if(this.map.getStandingOn() == 'E' && this.playerGold >= this.map.getGoldRequired()){
+            System.out.println("WIN, congratulations!");
+            System.exit(0);
+        }
+        else{
+            System.out.println("LOSE.");
+            System.exit(0);
+        }
     }
 
     public static void printRow(char[] row){
@@ -115,6 +122,9 @@ public class GameLogic {
             }
             else if(logic.playerCommand.equals("look")){
                 System.out.println(logic.look());
+            }
+            else if(logic.playerCommand.equals("quit")){
+                logic.quitGame();
             }
             else{
                 System.out.println("Fail");
