@@ -15,6 +15,9 @@ public class Map {
     /* Gold required for the human player to win */
     private int goldRequired;
 
+    private int playerPosX;
+    private int playerPosY;
+
     /**
      * Default constructor, creates the default map "Very small Labyrinth of doom".
      */
@@ -42,12 +45,77 @@ public class Map {
         int mapColumns = this.map[0].length;
 
         while(!canPlace){
-            int randRow = randNumGenerator.nextInt((mapRows - 1 - 1) + 1) + 1;
-            int randColumn = randNumGenerator.nextInt((mapColumns - 1 - 1) + 1) + 1;
+            //Since mapRows is the total number of rows, we subtract 1 to have the last addressable element
+            //We then subtract another 1 since we cannot let the player spawn on a wall, which is at the
+            //last addressable element. This gives mapRows - 2. We add 1 which is the minimum value we want
+            //to generate - excludes the top wall row (index 0). Finally we add 1 which again, is the minimum
+            //value we want to generate.
+            int randRow = randNumGenerator.nextInt((mapRows - 2 - 1) + 1) + 1;
+            int randColumn = randNumGenerator.nextInt((mapColumns - 2 - 1) + 1) + 1;
             if(this.map[randRow][randColumn] != 'G'){
                 canPlace = true;
                 this.map[randRow][randColumn] = 'P';
+                this.playerPosX = randColumn;
+                this.playerPosY = randRow;
             }
+        }
+    }
+
+    public int getPlayerPosX(){
+        return this.playerPosX;
+    }
+
+    public int getPlayerPosY(){
+        return this.playerPosY;
+    }
+
+    public void setPlayerPos(int newX, int newY){
+        this.map[playerPosY][playerPosX] = '.';
+        this.playerPosX = newX;
+        this.playerPosY = newY;
+        this.map[this.playerPosY][this.playerPosX] = 'P';
+    }
+
+    public void updatePlayerPos(char direction){
+        switch(direction){
+            case 'n':
+                if(this.map[this.playerPosY - 1][this.playerPosX] != '#'){
+                    setPlayerPos(this.playerPosX, this.playerPosY - 1);
+                    System.out.println("Success");
+                }
+                else{
+                    System.out.println("Fail");
+                }
+                break;
+            case 'e':
+                if(this.map[this.playerPosY][this.playerPosX + 1] != '#'){
+                    setPlayerPos(this.playerPosX + 1, this.playerPosY);
+                    System.out.println("Success");
+                }
+                else{
+                    System.out.println("Fail");
+                }
+                break;
+            case 's':
+                if(this.map[this.playerPosY + 1][this.playerPosX] != '#'){
+                    setPlayerPos(this.playerPosX, this.playerPosY + 1);
+                    System.out.println("Success");
+                }
+                else{
+                    System.out.println("Fail");
+                }
+                break;
+            case 'w':
+                if(this.map[this.playerPosY][this.playerPosX - 1] != '#'){
+                    setPlayerPos(this.playerPosX - 1, this.playerPosY);
+                    System.out.println("Success");
+                }
+                else{
+                    System.out.println("Fail");
+                }
+                break;
+            default:
+                System.out.println("Fail");
         }
     }
 

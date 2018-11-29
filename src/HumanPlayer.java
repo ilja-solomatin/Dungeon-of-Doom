@@ -10,9 +10,9 @@ public class HumanPlayer {
      * <p>
      * return : A string containing the input the player entered.
      */
-    protected String getInputFromConsole() {
+    protected String getInputFromConsole(){
         Scanner reader = new Scanner(System.in);
-        return reader.next();
+        return reader.nextLine();
     }
 
     /**
@@ -21,7 +21,7 @@ public class HumanPlayer {
      *
      * @return : Processed output or Invalid if the @param command is wrong.
      */
-    protected String getNextAction(String userInput) {
+    protected String getNextAction(String userInput){
         return null;
     }
 

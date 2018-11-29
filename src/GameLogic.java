@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * Contains the main logic part of the game, as it processes.
  *
@@ -49,10 +51,9 @@ public class GameLogic {
      * Checks if movement is legal and updates player's location on the map.
      *
      * @param direction : The direction of the movement.
-     * @return : Protocol if success or not.
      */
-    protected String move(char direction) {
-        return null;
+    protected void move(char direction) {
+        this.map.updatePlayerPos(direction);
     }
 
     /**
@@ -91,27 +92,28 @@ public class GameLogic {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         GameLogic logic = new GameLogic();
         while(true){
-            logic.playerCommand = logic.player.getInputFromConsole().toLowerCase();
-            switch (logic.playerCommand){
-                case "hello":
-                    System.out.println("Gold to win: " + logic.hello());
-                    break;
-                case "gold":
-                    System.out.println("Gold to win: " + logic.gold());
-                    break;
-                case "move":
-                    break;
-                case "pickup":
-                    break;
-                case "look":
-                    System.out.println(logic.look());
-                    break;
-                default:
-                    System.out.println("Fail");
-                    break;
+            logic.playerCommand = logic.player.getInputFromConsole();
+            System.out.println(logic.playerCommand);
+            if(logic.playerCommand.equals("hello")){
+                System.out.println("Gold to win: " + logic.hello());
+            }
+            else if(logic.playerCommand.equals("gold")){
+                System.out.println("Gold to win: " + logic.gold());
+            }
+            else if(logic.playerCommand.startsWith("move")){
+                logic.move(logic.playerCommand.charAt(logic.playerCommand.length() - 1));
+            }
+            else if(logic.playerCommand.equals("pickup")){
+
+            }
+            else if(logic.playerCommand.equals("look")){
+                System.out.println(logic.look());
+            }
+            else{
+                System.out.println("Fail");
             }
         }
     }
