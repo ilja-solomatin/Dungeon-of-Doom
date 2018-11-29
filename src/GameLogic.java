@@ -44,7 +44,7 @@ public class GameLogic {
      * @return : Gold currently owned.
      */
     protected String gold() {
-        return Integer.toString(this.playerGold);
+        return "Gold owned: " + Integer.toString(this.playerGold);
     }
 
     /**
@@ -75,10 +75,15 @@ public class GameLogic {
     /**
      * Processes the player's pickup command, updating the map and the player's gold amount.
      *
-     * @return If the player successfully picked-up gold or not.
      */
-    protected String pickup() {
-        return null;
+    protected void pickup() {
+        if(this.map.getStandingOn() == 'G'){
+            this.playerGold++;
+            System.out.println("SUCCESS. " + this.gold());
+        }
+        else{
+            System.out.println("FAIL. " + this.gold());
+        }
     }
 
     /**
@@ -96,18 +101,17 @@ public class GameLogic {
         GameLogic logic = new GameLogic();
         while(true){
             logic.playerCommand = logic.player.getInputFromConsole();
-            System.out.println(logic.playerCommand);
             if(logic.playerCommand.equals("hello")){
                 System.out.println("Gold to win: " + logic.hello());
             }
             else if(logic.playerCommand.equals("gold")){
-                System.out.println("Gold to win: " + logic.gold());
+                System.out.println("Gold owned: " + logic.gold());
             }
             else if(logic.playerCommand.startsWith("move")){
                 logic.move(logic.playerCommand.charAt(logic.playerCommand.length() - 1));
             }
             else if(logic.playerCommand.equals("pickup")){
-
+                logic.pickup();
             }
             else if(logic.playerCommand.equals("look")){
                 System.out.println(logic.look());

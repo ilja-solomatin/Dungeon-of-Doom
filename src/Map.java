@@ -18,6 +18,8 @@ public class Map {
     private int playerPosX;
     private int playerPosY;
 
+    private char standingOn;
+
     /**
      * Default constructor, creates the default map "Very small Labyrinth of doom".
      */
@@ -61,6 +63,14 @@ public class Map {
         }
     }
 
+    public void setStandingOn(int currentX, int currentY){
+        this.standingOn = this.map[currentY][currentX];
+    }
+
+    public char getStandingOn(){
+        return this.standingOn;
+    }
+
     public int getPlayerPosX(){
         return this.playerPosX;
     }
@@ -80,6 +90,7 @@ public class Map {
         switch(direction){
             case 'n':
                 if(this.map[this.playerPosY - 1][this.playerPosX] != '#'){
+                    this.setStandingOn(this.playerPosX, this.playerPosY - 1);
                     setPlayerPos(this.playerPosX, this.playerPosY - 1);
                     System.out.println("Success");
                 }
@@ -89,6 +100,7 @@ public class Map {
                 break;
             case 'e':
                 if(this.map[this.playerPosY][this.playerPosX + 1] != '#'){
+                    this.setStandingOn(this.playerPosX + 1, this.playerPosY);
                     setPlayerPos(this.playerPosX + 1, this.playerPosY);
                     System.out.println("Success");
                 }
@@ -98,6 +110,7 @@ public class Map {
                 break;
             case 's':
                 if(this.map[this.playerPosY + 1][this.playerPosX] != '#'){
+                    this.setStandingOn(this.playerPosX, this.playerPosY + 1);
                     setPlayerPos(this.playerPosX, this.playerPosY + 1);
                     System.out.println("Success");
                 }
@@ -107,6 +120,7 @@ public class Map {
                 break;
             case 'w':
                 if(this.map[this.playerPosY][this.playerPosX - 1] != '#'){
+                    this.setStandingOn(this.playerPosX - 1, this.playerPosY);
                     setPlayerPos(this.playerPosX - 1, this.playerPosY);
                     System.out.println("Success");
                 }

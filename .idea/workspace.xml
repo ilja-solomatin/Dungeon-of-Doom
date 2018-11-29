@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="333580e9-70c3-4cf1-8aed-3da0afd31816" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dungeon of Doom/GameLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dungeon of Doom/GameLogic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dungeon of Doom/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dungeon of Doom/Map.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HumanPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HumanPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RPN/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RPN/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RPN/out/production/RPN/SRPN.class" beforeDir="false" afterPath="$PROJECT_DIR$/../RPN/out/production/RPN/SRPN.class" afterDir="false" />
@@ -41,13 +37,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3738" />
+          <entry key="java" value="4167" />
           <entry key="txt" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3738" />
+          <entry key="JAVA" value="4167" />
           <entry key="PLAIN_TEXT" value="22" />
         </counts>
       </usages-collector>
@@ -58,19 +54,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameLogic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="95" column="42" lean-forward="true" selection-start-line="95" selection-start-column="42" selection-end-line="95" selection-end-column="42" />
+            <state relative-caret-position="448">
+              <caret line="88" column="7" lean-forward="true" selection-start-line="88" selection-start-column="7" selection-end-line="88" selection-end-column="7" />
               <folding>
                 <element signature="e#452#453#0" expanded="true" />
                 <element signature="e#480#481#0" expanded="true" />
                 <element signature="e#615#616#0" expanded="true" />
                 <element signature="e#677#678#0" expanded="true" />
-                <element signature="e#825#826#0" expanded="true" />
-                <element signature="e#881#882#0" expanded="true" />
+                <element signature="e#917#918#0" expanded="true" />
+                <element signature="e#990#991#0" expanded="true" />
                 <element signature="e#1173#1174#0" expanded="true" />
                 <element signature="e#1193#1194#0" expanded="true" />
-                <element signature="e#1573#1574#0" expanded="true" />
-                <element signature="e#1600#1601#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -79,9 +73,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Map.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="131" column="54" selection-start-line="131" selection-start-column="54" selection-end-line="131" selection-end-column="54" />
+            <state relative-caret-position="516">
+              <caret line="142" column="5" lean-forward="true" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
               <folding>
+                <element signature="e#2752#2753#0" expanded="true" />
+                <element signature="e#2803#2804#0" expanded="true" />
+                <element signature="e#2852#2853#0" expanded="true" />
+                <element signature="e#2873#2874#0" expanded="true" />
                 <element signature="e#2695#2696#0" expanded="true" />
                 <element signature="e#2721#2722#0" expanded="true" />
                 <element signature="e#2770#2771#0" expanded="true" />
@@ -128,8 +126,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/GameLogic.java" />
         <option value="$PROJECT_DIR$/src/HumanPlayer.java" />
+        <option value="$PROJECT_DIR$/src/GameLogic.java" />
         <option value="$PROJECT_DIR$/src/Map.java" />
       </list>
     </option>
@@ -166,7 +164,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543468346960" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543470670727" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -258,6 +256,23 @@
     <option name="LAST_COMMIT_MESSAGE" value="Creating fresh project" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/GameLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="88" column="7" lean-forward="true" selection-start-line="88" selection-start-column="7" selection-end-line="88" selection-end-column="7" />
+          <folding>
+            <element signature="e#452#453#0" expanded="true" />
+            <element signature="e#480#481#0" expanded="true" />
+            <element signature="e#615#616#0" expanded="true" />
+            <element signature="e#677#678#0" expanded="true" />
+            <element signature="e#917#918#0" expanded="true" />
+            <element signature="e#990#991#0" expanded="true" />
+            <element signature="e#1173#1174#0" expanded="true" />
+            <element signature="e#1193#1194#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/HumanPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -269,30 +284,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="95" column="42" lean-forward="true" selection-start-line="95" selection-start-column="42" selection-end-line="95" selection-end-column="42" />
-          <folding>
-            <element signature="e#452#453#0" expanded="true" />
-            <element signature="e#480#481#0" expanded="true" />
-            <element signature="e#615#616#0" expanded="true" />
-            <element signature="e#677#678#0" expanded="true" />
-            <element signature="e#825#826#0" expanded="true" />
-            <element signature="e#881#882#0" expanded="true" />
-            <element signature="e#1173#1174#0" expanded="true" />
-            <element signature="e#1193#1194#0" expanded="true" />
-            <element signature="e#1573#1574#0" expanded="true" />
-            <element signature="e#1600#1601#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Map.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="131" column="54" selection-start-line="131" selection-start-column="54" selection-end-line="131" selection-end-column="54" />
+        <state relative-caret-position="516">
+          <caret line="142" column="5" lean-forward="true" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
           <folding>
+            <element signature="e#2752#2753#0" expanded="true" />
+            <element signature="e#2803#2804#0" expanded="true" />
+            <element signature="e#2852#2853#0" expanded="true" />
+            <element signature="e#2873#2874#0" expanded="true" />
             <element signature="e#2695#2696#0" expanded="true" />
             <element signature="e#2721#2722#0" expanded="true" />
             <element signature="e#2770#2771#0" expanded="true" />
