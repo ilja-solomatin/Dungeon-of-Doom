@@ -17,8 +17,11 @@ public class Map {
 
     private int playerPosX;
     private int playerPosY;
+    private int botPosX;
+    private int botPosY;
 
-    private char standingOn;
+    private char playerStandingOn;
+    private char botStandingOn;
 
     /**
      * Default constructor, creates the default map "Very small Labyrinth of doom".
@@ -57,7 +60,7 @@ public class Map {
             int randColumn = randNumGenerator.nextInt((mapColumns - 2 - 1) + 1) + 1;
             if(this.map[randRow][randColumn] != 'G'){
                 canPlace = true;
-                this.setStandingOn(randColumn, randRow);
+                this.setStandingOn(randColumn, randRow, 'P');
                 this.map[randRow][randColumn] = 'P';
                 this.playerPosX = randColumn;
                 this.playerPosY = randRow;
@@ -76,24 +79,39 @@ public class Map {
             int randColumn = randNumGenerator.nextInt((mapColumns - 2 - 1) + 1) + 1;
             if(this.map[randRow][randColumn] != 'G' && this.map[randRow][randColumn] != 'P'){
                 canPlace = true;
-                //this.setStandingOn(randColumn, randRow);
+                this.setStandingOn(randColumn, randRow, 'B');
                 this.map[randRow][randColumn] = 'B';
-                //this.playerPosX = randColumn;
-                //this.playerPosY = randRow;
+                this.botPosX = randColumn;
+                this.botPosY = randRow;
             }
         }
     }
 
-    public void setStandingOn(int currentX, int currentY){
-        this.standingOn = this.map[currentY][currentX];
+    public void setStandingOn(int currentX, int currentY, char player){
+        if(player == 'P') {
+            this.playerStandingOn = this.map[currentY][currentX];
+        }
+        else{
+            this.botStandingOn = this.map[currentY][currentX];
+        }
     }
 
-    public void setStandingOn(char symbol){
-        this.standingOn = symbol;
+    public void setStandingOn(char symbol, char player){
+        if(player == 'P') {
+            this.playerStandingOn = symbol;
+        }
+        else{
+            this.botStandingOn = symbol;
+        }
     }
 
-    public char getStandingOn(){
-        return this.standingOn;
+    public char getStandingOn(char player){
+        if(player == 'P') {
+            return this.playerStandingOn;
+        }
+        else{
+            return this.botStandingOn;
+        }
     }
 
     public void setPlayerPos(int newX, int newY){
@@ -114,8 +132,8 @@ public class Map {
         switch(direction){
             case 'n':
                 if(this.map[this.playerPosY - 1][this.playerPosX] != '#'){
-                    this.map[this.playerPosY][this.playerPosX] = this.getStandingOn();
-                    this.setStandingOn(this.playerPosX, this.playerPosY - 1);
+                    this.map[this.playerPosY][this.playerPosX] = this.getStandingOn('P');
+                    this.setStandingOn(this.playerPosX, this.playerPosY - 1, 'P');
                     setPlayerPos(this.playerPosX, this.playerPosY - 1);
                     System.out.println("Success");
                 }
@@ -125,8 +143,8 @@ public class Map {
                 break;
             case 'e':
                 if(this.map[this.playerPosY][this.playerPosX + 1] != '#'){
-                    this.map[this.playerPosY][this.playerPosX] = this.getStandingOn();
-                    this.setStandingOn(this.playerPosX + 1, this.playerPosY);
+                    this.map[this.playerPosY][this.playerPosX] = this.getStandingOn('P');
+                    this.setStandingOn(this.playerPosX + 1, this.playerPosY, 'P');
                     setPlayerPos(this.playerPosX + 1, this.playerPosY);
                     System.out.println("Success");
                 }
@@ -136,8 +154,8 @@ public class Map {
                 break;
             case 's':
                 if(this.map[this.playerPosY + 1][this.playerPosX] != '#'){
-                    this.map[this.playerPosY][this.playerPosX] = this.getStandingOn();
-                    this.setStandingOn(this.playerPosX, this.playerPosY + 1);
+                    this.map[this.playerPosY][this.playerPosX] = this.getStandingOn('P');
+                    this.setStandingOn(this.playerPosX, this.playerPosY + 1, 'P');
                     setPlayerPos(this.playerPosX, this.playerPosY + 1);
                     System.out.println("Success");
                 }
@@ -147,9 +165,74 @@ public class Map {
                 break;
             case 'w':
                 if(this.map[this.playerPosY][this.playerPosX - 1] != '#'){
-                    this.map[this.playerPosY][this.playerPosX] = this.getStandingOn();
-                    this.setStandingOn(this.playerPosX - 1, this.playerPosY);
+                    this.map[this.playerPosY][this.playerPosX] = this.getStandingOn('P');
+                    this.setStandingOn(this.playerPosX - 1, this.playerPosY, 'P');
                     setPlayerPos(this.playerPosX - 1, this.playerPosY);
+                    System.out.println("Success");
+                }
+                else{
+                    System.out.println("Fail");
+                }
+                break;
+            default:
+                System.out.println("Fail");
+        }
+    }
+
+    public void setBotPos(int newX, int newY){
+        this.botPosX = newX;
+        this.botPosY = newY;
+        this.map[this.botPosY][this.botPosX] = 'B';
+    }
+
+    public int getBotPosX(){
+        return this.botPosX;
+    }
+
+    public int getBotPosY(){
+        return this.botPosY;
+    }
+
+    public void updateBotPos(char direction){
+        switch(direction){
+            case 'n':
+                if(this.map[this.botPosY - 1][this.botPosX] != '#'){
+                    this.map[this.botPosY][this.botPosX] = this.getStandingOn('B');
+                    this.setStandingOn(this.botPosX, this.botPosY - 1, 'B');
+                    setBotPos(this.botPosX, this.botPosY - 1);
+                    System.out.println("Success");
+                }
+                else{
+                    System.out.println("Fail");
+                }
+                break;
+            case 'e':
+                if(this.map[this.botPosY][this.botPosX + 1] != '#'){
+                    this.map[this.botPosY][this.botPosX] = this.getStandingOn('B');
+                    this.setStandingOn(this.botPosX + 1, this.botPosY, 'B');
+                    setBotPos(this.botPosX + 1, this.botPosY);
+                    System.out.println("Success");
+                }
+                else{
+                    System.out.println("Fail");
+                }
+                break;
+            case 's':
+                if(this.map[this.botPosY + 1][this.botPosX] != '#'){
+                    this.map[this.botPosY][this.botPosX] = this.getStandingOn('B');
+                    this.setStandingOn(this.botPosX, this.botPosY + 1, 'B');
+                    setBotPos(this.botPosX, this.botPosY + 1);
+                    System.out.println("Success");
+                }
+                else{
+                    System.out.println("Fail");
+                }
+                break;
+            case 'w':
+                if(this.map[this.botPosY][this.botPosX - 1] != '#'){
+                    this.map[this.botPosY][this.botPosX] = this.getStandingOn('B');
+                    this.setStandingOn(this.botPosX - 1, this.botPosY, 'P');
+                    setBotPos(this.botPosX - 1, this.botPosY);
                     System.out.println("Success");
                 }
                 else{

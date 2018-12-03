@@ -1,4 +1,4 @@
-import java.io.IOException;
+import java.util.Random;
 
 /**
  * Contains the main logic part of the game, as it processes.
@@ -8,6 +8,7 @@ public class GameLogic {
 
     private Map map;
     private HumanPlayer player;
+    private BotPlayer bot;
     private int playerGold;
     private String playerCommand;
 
@@ -17,6 +18,7 @@ public class GameLogic {
     public GameLogic() {
         map = new Map();
         player = new HumanPlayer();
+        bot = new BotPlayer();
         this.playerGold = 0;
     }
 
@@ -52,8 +54,13 @@ public class GameLogic {
      *
      * @param direction : The direction of the movement.
      */
-    protected void move(char direction) {
-        this.map.updatePlayerPos(direction);
+    protected void move(char direction, char player){
+        if(player == 'P') {
+            this.map.updatePlayerPos(direction);
+        }
+        else{
+            this.map.updateBotPos(direction);
+        }
     }
 
     /**
@@ -61,9 +68,19 @@ public class GameLogic {
      *
      * @return : A String representation of the game map.
      */
-    protected void look() {
-        int playerRow = this.map.getPlayerPosY();
-        int playerColumn = this.map.getPlayerPosX();
+    protected void look(char player) {
+        int playerRow;
+        int playerColumn;
+
+        if(player == 'P') {
+            playerRow = this.map.getPlayerPosY();
+            playerColumn = this.map.getPlayerPosX();
+        }
+        else{
+            playerRow = this.map.getBotPosY();
+            playerColumn = this.map.getBotPosX();
+        }
+
         char[][] map = this.map.getMap();
         for(int row = playerRow - 2; row <= playerRow + 2; row++){
             for(int column = playerColumn - 2; column <= playerColumn + 2; column++){
@@ -81,9 +98,9 @@ public class GameLogic {
      *
      */
     protected void pickup() {
-        if(this.map.getStandingOn() == 'G'){
+        if(this.map.getStandingOn('P') == 'G'){
             this.playerGold++;
-            this.map.setStandingOn('.');
+            this.map.setStandingOn('.', 'P');
             System.out.println("SUCCESS. Gold owned: " + this.gold());
         }
         else{
@@ -95,7 +112,7 @@ public class GameLogic {
      * Quits the game, shutting down the application.
      */
     protected void quitGame() {
-        if(this.map.getStandingOn() == 'E' && this.playerGold >= this.map.getGoldRequired()){
+        if(this.map.getStandingOn('P') == 'E' && this.playerGold >= this.map.getGoldRequired()){
             System.out.println("WIN, congratulations!");
             System.exit(0);
         }
@@ -105,13 +122,19 @@ public class GameLogic {
         }
     }
 
-    public static void printRow(char[] row){
-
+    protected boolean playerIsCaught(){
+        if(this.map.getStandingOn('P') == 'B' || this.map.getStandingOn('B') == 'P'){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public static void main(String[] args){
         GameLogic logic = new GameLogic();
         while(true){
+            System.out.println("\nYour turn.");
             logic.playerCommand = logic.player.getInputFromConsole();
             if(logic.playerCommand.equals("hello")){
                 System.out.println("Gold to win: " + logic.hello());
@@ -120,19 +143,33 @@ public class GameLogic {
                 System.out.println("Gold owned: " + logic.gold());
             }
             else if(logic.playerCommand.startsWith("move")){
-                logic.move(logic.playerCommand.charAt(logic.playerCommand.length() - 1));
+                logic.move(logic.playerCommand.charAt(logic.playerCommand.length() - 1), 'P');
             }
             else if(logic.playerCommand.equals("pickup")){
                 logic.pickup();
             }
             else if(logic.playerCommand.equals("look")){
-                logic.look();
+                logic.look('P');
             }
             else if(logic.playerCommand.equals("quit")){
                 logic.quitGame();
             }
             else{
                 System.out.println("Fail");
+            }
+
+            if(logic.playerIsCaught()){
+                System.out.println("You have been caught by the bot!");
+                logic.quitGame();
+            }
+
+            System.out.println("\nBot's turn.");
+            logic.playerCommand = logic.bot.getCommand();
+            if(logic.playerCommand.startsWith("move")){
+                logic.move(logic.playerCommand.charAt(logic.playerCommand.length() - 1), 'B');
+            }
+            else{
+                logic.look('B');
             }
         }
     }
