@@ -38,6 +38,7 @@ public class Map {
                 {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'}
         };
         this.placePlayer();
+        this.placeBot();
     }
 
     private void placePlayer(){
@@ -60,6 +61,25 @@ public class Map {
                 this.map[randRow][randColumn] = 'P';
                 this.playerPosX = randColumn;
                 this.playerPosY = randRow;
+            }
+        }
+    }
+
+    private void placeBot(){
+        Random randNumGenerator =  new Random();
+        boolean canPlace = false;
+        int mapRows = this.map.length;
+        int mapColumns = this.map[0].length;
+
+        while(!canPlace){
+            int randRow = randNumGenerator.nextInt((mapRows - 2 - 1) + 1) + 1;
+            int randColumn = randNumGenerator.nextInt((mapColumns - 2 - 1) + 1) + 1;
+            if(this.map[randRow][randColumn] != 'G' && this.map[randRow][randColumn] != 'P'){
+                canPlace = true;
+                //this.setStandingOn(randColumn, randRow);
+                this.map[randRow][randColumn] = 'B';
+                //this.playerPosX = randColumn;
+                //this.playerPosY = randRow;
             }
         }
     }
