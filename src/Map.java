@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.io.*;
 
 /**
  * Reads and contains in memory the map of the game.
@@ -249,7 +250,7 @@ public class Map {
      *
      * @param : The filename of the map file.
      */
-    public Map(String fileName) {
+    public Map(String fileName) throws Exception {
         readMap(fileName);
     }
 
@@ -281,7 +282,13 @@ public class Map {
      *
      * @param : Name of the map's file.
      */
-    protected void readMap(String fileName) {
+    protected void readMap(String fileName) throws Exception {
+        String workingDirectory = System.getProperty("user.dir");
+        File file = new File(workingDirectory + "\\" + fileName + ".txt");
+        BufferedReader fileReader = new BufferedReader(new FileReader(file));
+        while(fileReader.read() != -1){
+            System.out.print(fileReader.readLine());
+        }
     }
 
 

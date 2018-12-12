@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Contains the main logic part of the game, as it processes.
@@ -131,8 +133,23 @@ public class GameLogic {
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
         GameLogic logic = new GameLogic();
+        System.out.println("Would you like to load a map? (Y/N)");
+        Scanner reader = new Scanner(System.in);
+        if(reader.nextLine().toUpperCase().equals("Y")) {
+            System.out.println("Enter the file name: ");
+            String fileName = reader.nextLine();
+            try{
+                logic.map.readMap(fileName);
+            }
+            catch(IOException e){
+                System.out.println("Error opening file, using default map.");
+            }
+        }
+        else{
+            System.out.println("Using default map.");
+        }
         while(true){
             System.out.println("\nYour turn.");
             logic.playerCommand = logic.player.getInputFromConsole();
@@ -170,6 +187,11 @@ public class GameLogic {
             }
             else{
                 logic.look('B');
+            }
+
+            if(logic.playerIsCaught()){
+                System.out.println("You have been caught by the bot!");
+                logic.quitGame();
             }
         }
     }
