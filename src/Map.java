@@ -59,7 +59,7 @@ public class Map {
             //value we want to generate.
             int randRow = randNumGenerator.nextInt((mapRows - 2 - 1) + 1) + 1;
             int randColumn = randNumGenerator.nextInt((mapColumns - 2 - 1) + 1) + 1;
-            if(this.map[randRow][randColumn] != 'G'){
+            if(this.map[randRow][randColumn] != 'G' && this.map[randRow][randColumn] != '#'){
                 canPlace = true;
                 this.setStandingOn(randColumn, randRow, 'P');
                 this.map[randRow][randColumn] = 'P';
@@ -78,7 +78,7 @@ public class Map {
         while(!canPlace){
             int randRow = randNumGenerator.nextInt((mapRows - 2 - 1) + 1) + 1;
             int randColumn = randNumGenerator.nextInt((mapColumns - 2 - 1) + 1) + 1;
-            if(this.map[randRow][randColumn] != 'G' && this.map[randRow][randColumn] != 'P'){
+            if(this.map[randRow][randColumn] != 'G' && this.map[randRow][randColumn] != 'P' && this.map[randRow][randColumn] != '#'){
                 canPlace = true;
                 this.setStandingOn(randColumn, randRow, 'B');
                 this.map[randRow][randColumn] = 'B';
@@ -286,8 +286,13 @@ public class Map {
         String workingDirectory = System.getProperty("user.dir");
         File file = new File(workingDirectory + "\\" + fileName + ".txt");
         BufferedReader fileReader = new BufferedReader(new FileReader(file));
+        this.mapName = fileReader.readLine().substring(5);
+        this.goldRequired = Integer.valueOf(fileReader.readLine().substring(4));
+
+        int mapRowCounter = 0;
         while(fileReader.read() != -1){
-            System.out.print(fileReader.readLine());
+            this.map[mapRowCounter] = fileReader.readLine().toCharArray();
+            mapRowCounter++;
         }
     }
 

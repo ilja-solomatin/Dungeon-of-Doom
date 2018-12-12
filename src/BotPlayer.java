@@ -6,7 +6,7 @@ public class BotPlayer {
     private char[] randDirection = {'n', 'e', 's', 'w'};
 
     public String getCommand(){
-        randCommand = randNumGenerator.nextInt(4) + 1; //random number between 4 and 1.
+        randCommand = randNumGenerator.nextInt(4) + 1; //random number from 1 and 4 inclusive.
         if(randCommand == 1){
             return "look";
         }

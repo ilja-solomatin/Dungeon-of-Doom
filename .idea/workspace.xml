@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="333580e9-70c3-4cf1-8aed-3da0afd31816" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dungeon of Doom/GameLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dungeon of Doom/GameLogic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dungeon of Doom/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dungeon of Doom/Map.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BotPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BotPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RPN/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RPN/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RPN/out/production/RPN/SRPN.class" beforeDir="false" afterPath="$PROJECT_DIR$/../RPN/out/production/RPN/SRPN.class" afterDir="false" />
@@ -45,13 +41,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="8163" />
+          <entry key="java" value="8451" />
           <entry key="txt" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="8163" />
+          <entry key="JAVA" value="8451" />
           <entry key="PLAIN_TEXT" value="22" />
         </counts>
       </usages-collector>
@@ -59,11 +55,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameLogic.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="530">
-              <caret line="149" column="13" lean-forward="true" selection-start-line="149" selection-start-column="13" selection-end-line="149" selection-end-column="13" />
+              <caret line="77" column="49" lean-forward="true" selection-start-line="77" selection-start-column="49" selection-end-line="77" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -74,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Map.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="620">
-              <caret line="281" column="6" lean-forward="true" selection-start-line="281" selection-start-column="6" selection-end-line="281" selection-end-column="6" />
+            <state relative-caret-position="533">
+              <caret line="286" column="29" lean-forward="true" selection-start-line="286" selection-start-column="29" selection-end-line="286" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -83,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/BotPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="272">
+              <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -119,9 +115,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/HumanPlayer.java" />
-        <option value="$PROJECT_DIR$/src/BotPlayer.java" />
-        <option value="$PROJECT_DIR$/src/Map.java" />
         <option value="$PROJECT_DIR$/src/GameLogic.java" />
+        <option value="$PROJECT_DIR$/src/Map.java" />
+        <option value="$PROJECT_DIR$/src/BotPlayer.java" />
       </list>
     </option>
   </component>
@@ -157,7 +153,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544587678047" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544592742507" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -249,16 +245,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Creating fresh project" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Map.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="281" column="6" lean-forward="true" selection-start-line="281" selection-start-column="6" selection-end-line="281" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/HumanPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -266,20 +252,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BotPlayer.java">
+    <entry file="file://$PROJECT_DIR$/src/Map.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="533">
+          <caret line="286" column="29" lean-forward="true" selection-start-line="286" selection-start-column="29" selection-end-line="286" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameLogic.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="530">
-          <caret line="149" column="13" lean-forward="true" selection-start-line="149" selection-start-column="13" selection-end-line="149" selection-end-column="13" />
+          <caret line="77" column="49" lean-forward="true" selection-start-line="77" selection-start-column="49" selection-end-line="77" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BotPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
         </state>
       </provider>
     </entry>
