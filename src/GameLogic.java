@@ -24,6 +24,13 @@ public class GameLogic {
         this.playerGold = 0;
     }
 
+    public GameLogic(String fileName) throws IOException{
+        map = new Map(fileName);
+        player = new HumanPlayer();
+        bot = new BotPlayer();
+        this.playerGold = 0;
+    }
+
     /**
      * Checks if the game is running
      *
@@ -133,23 +140,26 @@ public class GameLogic {
         }
     }
 
-    public static void main(String[] args) throws Exception{
-        GameLogic logic = new GameLogic();
+    public static void main(String[] args) {
+        GameLogic logic;
         System.out.println("Would you like to load a map? (Y/N)");
         Scanner reader = new Scanner(System.in);
         if(reader.nextLine().toUpperCase().equals("Y")) {
             System.out.println("Enter the file name: ");
             String fileName = reader.nextLine();
             try{
-                logic.map.readMap(fileName);
+                logic = new GameLogic(fileName);
             }
-            catch(IOException e){
+            catch(Exception e){
                 System.out.println("Error opening file, using default map.");
+                logic = new GameLogic();
             }
         }
         else{
             System.out.println("Using default map.");
+            logic = new GameLogic();
         }
+        System.out.println("Currently loaded map: " + logic.map.getMapName());
         while(true){
             System.out.println("\nYour turn.");
             logic.playerCommand = logic.player.getInputFromConsole();

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.io.*;
 
@@ -250,8 +252,10 @@ public class Map {
      *
      * @param : The filename of the map file.
      */
-    public Map(String fileName) throws Exception {
+    public Map(String fileName) throws IOException {
         readMap(fileName);
+        this.placePlayer();
+        this.placeBot();
     }
 
     /**
@@ -282,19 +286,22 @@ public class Map {
      *
      * @param : Name of the map's file.
      */
-    protected void readMap(String fileName) throws Exception {
+    protected void readMap(String fileName) throws IOException {
         String workingDirectory = System.getProperty("user.dir");
         File file = new File(workingDirectory + "\\" + fileName + ".txt");
         BufferedReader fileReader = new BufferedReader(new FileReader(file));
         this.mapName = fileReader.readLine().substring(5);
         this.goldRequired = Integer.valueOf(fileReader.readLine().substring(4));
-
         int mapRowCounter = 0;
-        while(fileReader.read() != -1){
-            this.map[mapRowCounter] = fileReader.readLine().toCharArray();
+        int chr;
+        int width = 1;
+        int height = 1;
+        String line;
+        this.map = new char[0][];
+        while((line = fileReader.readLine()) != null){
             mapRowCounter++;
+            this.map = Arrays.copyOf(this.map, mapRowCounter);
+            this.map[mapRowCounter - 1] = line.toCharArray();
         }
     }
-
-
 }
