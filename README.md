@@ -34,7 +34,7 @@ The map is represented by various symbols:
 - '#' represents a wall.
 - '.' represents an empty floor tile.
 
-An example map is shown below:
+An example map is shown below:  
 ##########################  
 #........................#  
 #.....###........###.....#  
@@ -46,7 +46,7 @@ An example map is shown below:
 #..........###...........#  
 #........................#  
 ##########################  
-
+  
 The commands available in the game:
 - 'hello' - displays the total amount of gold required to be eligeble to win the game.
 - 'gold' - displays the current gold owned by the player.
