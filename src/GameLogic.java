@@ -1,30 +1,35 @@
 import java.io.IOException;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
  * Contains the main logic part of the game, as it processes.
- *
  */
 public class GameLogic {
-
+    //Declaring objects for the game
     private Map map;
     private HumanPlayer player;
     private BotPlayer bot;
+
     private int playerGold;
     private String playerCommand;
 
     /**
      * Default constructor
      */
-    public GameLogic() {
+    private GameLogic() {
         map = new Map();
         player = new HumanPlayer();
         bot = new BotPlayer();
         this.playerGold = 0;
     }
 
-    public GameLogic(String fileName) throws IOException{
+    /**
+     * Overloaded constructor with a file name.
+     *
+     * @param fileName : the name of the file to be read
+     * @throws IOException : possible error when reading from a file
+     */
+    private GameLogic(String fileName) throws IOException{
         map = new Map(fileName);
         player = new HumanPlayer();
         bot = new BotPlayer();
@@ -32,20 +37,11 @@ public class GameLogic {
     }
 
     /**
-     * Checks if the game is running
-     *
-     * @return if the game is running.
-     */
-    protected boolean gameRunning() {
-        return false;
-    }
-
-    /**
      * Returns the gold required to win.
      *
      * @return : Gold required to win.
      */
-    protected String hello() {
+    private String hello() {
         return Integer.toString(map.getGoldRequired());
     }
 
@@ -54,7 +50,7 @@ public class GameLogic {
      *
      * @return : Gold currently owned.
      */
-    protected String gold() {
+    private String gold() {
         return Integer.toString(this.playerGold);
     }
 
@@ -62,8 +58,9 @@ public class GameLogic {
      * Checks if movement is legal and updates player's location on the map.
      *
      * @param direction : The direction of the movement.
+     * @param player : Char representing the player who is attempting to move.
      */
-    protected void move(char direction, char player){
+    private void move(char direction, char player){
         if(player == 'P') {
             this.map.updatePlayerPos(direction);
         }
@@ -73,17 +70,17 @@ public class GameLogic {
     }
 
     /**
-     * Converts the map from a 2D char array to a single string.
+     * Method to display a 5x5 grid of the map around the player.
      *
-     * @return : A String representation of the game map.
+     * @param player : The player using the look command, to display the grid around them.
      */
-    protected void look(char player) {
+    private void look(char player) {
         int playerRow;
         int playerColumn;
 
         if(player == 'P') {
-            playerRow = this.map.getPlayerPosY();
-            playerColumn = this.map.getPlayerPosX();
+            playerRow = this.map.getPlayerPosY(); // The row the player is standing in
+            playerColumn = this.map.getPlayerPosX(); // The column the player is standing in
         }
         else{
             playerRow = this.map.getBotPosY();
@@ -91,9 +88,9 @@ public class GameLogic {
         }
 
         char[][] map = this.map.getMap();
-        for(int row = playerRow - 2; row <= playerRow + 2; row++){
-            for(int column = playerColumn - 2; column <= playerColumn + 2; column++){
-                if(row >= 0 && row < map.length && column >= 0 && column < map[0].length){
+        for(int row = playerRow - 2; row <= playerRow + 2; row++){ // From 2 rows above the player, to 2 rows below the player
+            for(int column = playerColumn - 2; column <= playerColumn + 2; column++){ // 2 columns above player to 2 columns below
+                if(row >= 0 && row < map.length && column >= 0 && column < map[0].length){ // If the row and columns are within bounds of map
                     System.out.print(map[row][column]);
                     System.out.print("\t");
                 }
@@ -104,9 +101,8 @@ public class GameLogic {
 
     /**
      * Processes the player's pickup command, updating the map and the player's gold amount.
-     *
      */
-    protected void pickup() {
+    private void pickup() {
         if(this.map.getStandingOn('P') == 'G'){
             this.playerGold++;
             this.map.setStandingOn('.', 'P');
@@ -120,7 +116,7 @@ public class GameLogic {
     /**
      * Quits the game, shutting down the application.
      */
-    protected void quitGame() {
+    private void quitGame() {
         if(this.map.getStandingOn('P') == 'E' && this.playerGold >= this.map.getGoldRequired()){
             System.out.println("WIN, congratulations!");
             System.exit(0);
@@ -131,7 +127,12 @@ public class GameLogic {
         }
     }
 
-    protected boolean playerIsCaught(){
+    /**
+     * Check if the player has been caught by the bot.
+     *
+     * @return : boolean value indicating if the bot is standing on the players location.
+     */
+    private boolean playerIsCaught(){
         if(this.map.getStandingOn('P') == 'B' || this.map.getStandingOn('B') == 'P'){
             return true;
         }
@@ -142,15 +143,17 @@ public class GameLogic {
 
     public static void main(String[] args) {
         GameLogic logic;
+        //Prompt to load a file
         System.out.println("Would you like to load a map? (Y/N)");
         Scanner reader = new Scanner(System.in);
         if(reader.nextLine().toUpperCase().equals("Y")) {
             System.out.println("Enter the file name: ");
             String fileName = reader.nextLine();
             try{
+                // if a file has been supplied, attempt to call the constructor with the file name.
                 logic = new GameLogic(fileName);
             }
-            catch(Exception e){
+            catch(IOException e){
                 System.out.println("Error opening file, using default map.");
                 logic = new GameLogic();
             }
@@ -160,6 +163,8 @@ public class GameLogic {
             logic = new GameLogic();
         }
         System.out.println("Currently loaded map: " + logic.map.getMapName());
+
+        // Take turns indefinitely, or until the player is caught, or the player wins the game
         while(true){
             System.out.println("\nYour turn.");
             logic.playerCommand = logic.player.getInputFromConsole();
@@ -171,6 +176,12 @@ public class GameLogic {
             }
             else if(logic.playerCommand.startsWith("move")){
                 logic.move(logic.playerCommand.charAt(logic.playerCommand.length() - 1), 'P');
+
+                //Check if the player has been caught after making a move
+                if(logic.playerIsCaught()){
+                    System.out.println("You have been caught by the bot!");
+                    logic.quitGame();
+                }
             }
             else if(logic.playerCommand.equals("pickup")){
                 logic.pickup();
@@ -185,15 +196,15 @@ public class GameLogic {
                 System.out.println("Fail");
             }
 
-            if(logic.playerIsCaught()){
-                System.out.println("You have been caught by the bot!");
-                logic.quitGame();
-            }
-
+            // Performs the bot turn, which will only be moving or looking.
             System.out.println("\nBot's turn.");
             logic.playerCommand = logic.bot.getCommand();
             if(logic.playerCommand.startsWith("move")){
                 logic.move(logic.playerCommand.charAt(logic.playerCommand.length() - 1), 'B');
+                if(logic.playerIsCaught()){
+                    System.out.println("You have been caught by the bot!");
+                    logic.quitGame();
+                }
             }
             else{
                 logic.look('B');

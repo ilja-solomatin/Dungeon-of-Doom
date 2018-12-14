@@ -1,13 +1,11 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.io.*;
 
 /**
  * Reads and contains in memory the map of the game.
- *
  */
-public class Map {
+class Map {
 
     /* Representation of the map */
     private char[][] map;
@@ -18,18 +16,20 @@ public class Map {
     /* Gold required for the human player to win */
     private int goldRequired;
 
+    /* X and Y coordinates for both the player and the bot */
     private int playerPosX;
     private int playerPosY;
     private int botPosX;
     private int botPosY;
 
+    /* Stores the character the players will be standing on, e.g 'G' for gold, or 'E' for exit */
     private char playerStandingOn;
     private char botStandingOn;
 
     /**
      * Default constructor, creates the default map "Very small Labyrinth of doom".
      */
-    public Map() {
+    Map() {
         this.mapName = "Very small Labyrinth of Doom";
         this.goldRequired = 2;
         this.map = new char[][]{
@@ -43,15 +43,19 @@ public class Map {
                 {'#','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','#'},
                 {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'}
         };
+        // Calls methods to generate a random starting location for the player, followed by the bot
         this.placePlayer();
         this.placeBot();
     }
 
+    /**
+     * Method which will generate random indexes for the 2D array, and will place the player at that location
+     */
     private void placePlayer(){
         Random randNumGenerator =  new Random();
-        boolean canPlace = false;
-        int mapRows = this.map.length;
-        int mapColumns = this.map[0].length;
+        boolean canPlace = false; // a flag value to ensure that the generate coordinates are valid to spawn a player there
+        int mapRows = this.map.length; // height of map
+        int mapColumns = this.map[0].length; // width of map
 
         while(!canPlace){
             //Since mapRows is the total number of rows, we subtract 1 to have the last addressable element
@@ -61,16 +65,21 @@ public class Map {
             //value we want to generate.
             int randRow = randNumGenerator.nextInt((mapRows - 2 - 1) + 1) + 1;
             int randColumn = randNumGenerator.nextInt((mapColumns - 2 - 1) + 1) + 1;
+            // if the generated coordinates are not the gold, or wall, then..
             if(this.map[randRow][randColumn] != 'G' && this.map[randRow][randColumn] != '#'){
                 canPlace = true;
-                this.setStandingOn(randColumn, randRow, 'P');
-                this.map[randRow][randColumn] = 'P';
-                this.playerPosX = randColumn;
+                this.setStandingOn(randColumn, randRow, 'P'); // set the player to stand at the generated coordinates
+                this.map[randRow][randColumn] = 'P'; // write the player symbol on the map at the generated coordinates
+                this.playerPosX = randColumn; // update values which store the players current coordinates
                 this.playerPosY = randRow;
             }
         }
     }
 
+    /**
+     * Method which is almost identical to the one above (for the player), but will ensure the bot doesn't spawn
+     * on top of the player.
+     */
     private void placeBot(){
         Random randNumGenerator =  new Random();
         boolean canPlace = false;
@@ -90,7 +99,16 @@ public class Map {
         }
     }
 
-    public void setStandingOn(int currentX, int currentY, char player){
+    /**
+     * Method which will update the player, or bots position on the map, given coordinates,
+     * storing them in a variable.
+     *
+     * @param currentX : Stores the players current X coordinate.
+     * @param currentY : Stores the players current Y coordinate
+     * @param player : symbol which identifies the player which will have their position set
+     *               e.g 'P' or 'B', for the player or bot respectively.
+     */
+    private void setStandingOn(int currentX, int currentY, char player){
         if(player == 'P') {
             this.playerStandingOn = this.map[currentY][currentX];
         }
@@ -99,7 +117,14 @@ public class Map {
         }
     }
 
-    public void setStandingOn(char symbol, char player){
+    /**
+     * Method similar to the one above, but with one less parameter.
+     * This method will set the players standing on symbol to the one supplied.
+     *
+     * @param symbol : char which the player is standing on
+     * @param player : char to represent which players' standing on symbol to update, e.g 'P' or 'B'
+     */
+    void setStandingOn(char symbol, char player){
         if(player == 'P') {
             this.playerStandingOn = symbol;
         }
@@ -108,7 +133,14 @@ public class Map {
         }
     }
 
-    public char getStandingOn(char player){
+    /**
+     * Method which will get the symbol that the player is standing on.
+     *
+     * @param player : char representing which players standing on symbol to return, e.g 'P' or 'B'
+     *
+     * @return : the symbol that the player is standing on
+     */
+    char getStandingOn(char player){
         if(player == 'P') {
             return this.playerStandingOn;
         }
@@ -117,21 +149,49 @@ public class Map {
         }
     }
 
-    public void setPlayerPos(int newX, int newY){
+    /**
+     * Method which will set the players X and Y coordinates
+     *
+     * @param newX : the X value to be updated to
+     * @param newY : the Y value to be updated to
+     */
+    private void setPlayerPos(int newX, int newY){
         this.playerPosX = newX;
         this.playerPosY = newY;
         this.map[this.playerPosY][this.playerPosX] = 'P';
     }
 
-    public int getPlayerPosX(){
+    /**
+     * Method to get the players X position
+     * @return : the players X position
+     */
+    int getPlayerPosX(){
         return this.playerPosX;
     }
 
-    public int getPlayerPosY(){
+    /**
+     * Method to get the players Y position
+     * @return
+     */
+    int getPlayerPosY(){
         return this.playerPosY;
     }
 
-    public void updatePlayerPos(char direction){
+    /**
+     * Method to update the players position when supplied a direction to move towards.
+     *
+     * @param direction : char representing direction to move, e.g 'n' for north, etc.
+     */
+    void updatePlayerPos(char direction){
+        /*
+         * In each case, if the position the player wishes to move into is not a wall then:
+         * The maps coordinates where the player is still standing, is set back to the original symbol.
+         * For example, if the player was standing on 'G', but decided to move away from it, the symbol 'P' would
+         * need to be set back to 'G'.
+         *
+         * Next, store the symbol that the player is about to move to, as it will be overwritten.
+         * Then, update the players new position on the map, followed by a "success" or "fail" message.
+         */
         switch(direction){
             case 'n':
                 if(this.map[this.playerPosY - 1][this.playerPosX] != '#'){
@@ -178,25 +238,47 @@ public class Map {
                 }
                 break;
             default:
+                // If a non existent direction is supplied, e.g one that isn't 'n', 'e', 's', or 'w', print a fail message.
                 System.out.println("Fail");
         }
     }
 
-    public void setBotPos(int newX, int newY){
+    /**
+     * Method to set the bots X and Y coordinates.
+     *
+     * @param newX : the X value to be updated to
+     * @param newY : the Y value to be updated to
+     */
+    private void setBotPos(int newX, int newY){
         this.botPosX = newX;
         this.botPosY = newY;
         this.map[this.botPosY][this.botPosX] = 'B';
     }
 
-    public int getBotPosX(){
+    /**
+     * Method to get the bots X value.
+     *
+     * @return : integer which is the bots X position
+     */
+    int getBotPosX(){
         return this.botPosX;
     }
 
-    public int getBotPosY(){
+    /**
+     * Method to get the bots Y value.
+     *
+     * @return : integer which is the bots Y position
+     */
+    int getBotPosY(){
         return this.botPosY;
     }
 
-    public void updateBotPos(char direction){
+    /**
+     * Method to update the bots position on the map, similar to the one above to update the players position.
+     *
+     * @param direction : char representing the direction to move to, e.g 'n' for north
+     */
+    void updateBotPos(char direction){
         switch(direction){
             case 'n':
                 if(this.map[this.botPosY - 1][this.botPosX] != '#'){
@@ -248,11 +330,11 @@ public class Map {
     }
 
     /**
-     * Constructor that accepts a map to read in from.
+     * Constructor that accepts a map to read in from, then calls the methods to generate a position for the player and bot.
      *
      * @param : The filename of the map file.
      */
-    public Map(String fileName) throws IOException {
+    Map(String fileName) throws IOException {
         readMap(fileName);
         this.placePlayer();
         this.placeBot();
@@ -261,47 +343,43 @@ public class Map {
     /**
      * @return : Gold required to exit the current map.
      */
-    protected int getGoldRequired() {
+    int getGoldRequired() {
         return this.goldRequired;
     }
 
     /**
      * @return : The map as stored in memory.
      */
-    protected char[][] getMap() {
+    char[][] getMap() {
         return this.map;
     }
-
 
     /**
      * @return : The name of the current map.
      */
-    protected String getMapName() {
+    String getMapName() {
         return this.mapName;
     }
-
 
     /**
      * Reads the map from file.
      *
      * @param : Name of the map's file.
      */
-    protected void readMap(String fileName) throws IOException {
-        String workingDirectory = System.getProperty("user.dir");
+    private void readMap(String fileName) throws IOException {
+        String workingDirectory = System.getProperty("user.dir"); // Get the directory the program is executing from
         File file = new File(workingDirectory + "\\" + fileName + ".txt");
         BufferedReader fileReader = new BufferedReader(new FileReader(file));
-        this.mapName = fileReader.readLine().substring(5);
-        this.goldRequired = Integer.valueOf(fileReader.readLine().substring(4));
-        int mapRowCounter = 0;
-        int chr;
-        int width = 1;
-        int height = 1;
-        String line;
-        this.map = new char[0][];
-        while((line = fileReader.readLine()) != null){
-            mapRowCounter++;
-            this.map = Arrays.copyOf(this.map, mapRowCounter);
-            this.map[mapRowCounter - 1] = line.toCharArray();
+
+        this.mapName = fileReader.readLine().substring(5); // First 5 characters are 'name ' which are not needed, so take after it
+        this.goldRequired = Integer.valueOf(fileReader.readLine().substring(4)); // First 4 characters are 'win '
+        int mapRowCounter = 0; // Starting from the top row
+        String line; // line from the file being read
+        this.map = new char[0][]; // instantiating the map array with 0 elements
+        while((line = fileReader.readLine()) != null){ // while the read line form the file isn't empty
+            mapRowCounter++; // increase the number of rows in the map
+            this.map = Arrays.copyOf(this.map, mapRowCounter); // update the map to be a copy of the previous map but with an extra row
+            this.map[mapRowCounter - 1] = line.toCharArray(); // set the previous rows elements to those read from the file
         }
     }
 }
