@@ -368,7 +368,7 @@ class Map {
      */
     private void readMap(String fileName) throws IOException {
         String workingDirectory = System.getProperty("user.dir"); // Get the directory the program is executing from
-        File file = new File(workingDirectory + "\\" + fileName + ".txt");
+        File file = new File(workingDirectory + "/" + fileName + ".txt");
         BufferedReader fileReader = new BufferedReader(new FileReader(file));
 
         this.mapName = fileReader.readLine().substring(5); // First 5 characters are 'name ' which are not needed, so take after it

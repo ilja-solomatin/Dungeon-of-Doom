@@ -13,6 +13,9 @@ public class GameLogic {
     private int playerGold;
     private String playerCommand;
 
+    private boolean canSeePlayer;
+    private int seenPlayerCounter; // to count how for how many turns the bot sees the player, once he has spotted the player
+
     /**
      * Default constructor
      */
@@ -21,6 +24,7 @@ public class GameLogic {
         player = new HumanPlayer();
         bot = new BotPlayer();
         this.playerGold = 0;
+        this.canSeePlayer = false;
     }
 
     /**
@@ -34,6 +38,8 @@ public class GameLogic {
         player = new HumanPlayer();
         bot = new BotPlayer();
         this.playerGold = 0;
+        this.canSeePlayer = false;
+        this.seenPlayerCounter = 0;
     }
 
     /**
@@ -93,6 +99,12 @@ public class GameLogic {
                 if(row >= 0 && row < map.length && column >= 0 && column < map[0].length){ // If the row and columns are within bounds of map
                     System.out.print(map[row][column]);
                     System.out.print("\t");
+
+                    // If the bot can see the player when using "look", then set boolean to true
+                    if(player == 'B' && map[row][column] == 'P'){
+                        this.canSeePlayer = true;
+                        this.seenPlayerCounter = 0; // Reset seen counter to 0
+                    }
                 }
             }
             System.out.println();
@@ -143,6 +155,7 @@ public class GameLogic {
 
     public static void main(String[] args) {
         GameLogic logic;
+
         //Prompt to load a file
         System.out.println("Would you like to load a map? (Y/N)");
         Scanner reader = new Scanner(System.in);
@@ -198,7 +211,19 @@ public class GameLogic {
 
             // Performs the bot turn, which will only be moving or looking.
             System.out.println("\nBot's turn.");
-            logic.playerCommand = logic.bot.getCommand();
+
+            // If the bot has known the players location for 3 rounds, reset the counter back to 0 and prevent from seeing.
+            if(logic.seenPlayerCounter >= 3){
+                logic.seenPlayerCounter = 0;
+                logic.canSeePlayer = false;
+            }
+            else{
+                logic.seenPlayerCounter++;
+            }
+
+            logic.playerCommand = logic.bot.getCommand(logic.canSeePlayer, logic.map.getPlayerPosX(),
+                                                        logic.map.getPlayerPosY() ,logic.map.getBotPosX()
+                                                        ,logic.map.getBotPosY());
             if(logic.playerCommand.startsWith("move")){
                 logic.move(logic.playerCommand.charAt(logic.playerCommand.length() - 1), 'B');
                 if(logic.playerIsCaught()){
